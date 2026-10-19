@@ -1,0 +1,567 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amali & Kasun | Wedding Invitation</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --wine: #792e40;
+  --wine-dark: #4c1d2a;
+  --gold: #bd9a5f;
+  --cream: #fffaf3;
+  --ink: #48343a;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at top, #fffdf8 0%, #f6ece5 70%);
+  color: var(--ink);
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+.page {
+  width: 100%;
+  max-width: 760px;
+  margin: auto;
+  padding: 45px 20px 70px;
+  text-align: center;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 5px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.intro-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(25px, 5vw, 37px);
+  font-weight: 400;
+  margin: 0;
+  color: var(--wine-dark);
+}
+
+.intro-subtitle {
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-top: 14px;
+  color: #947b76;
+}
+
+/* Decorative frame */
+
+.envelope-scene {
+  width: min(100%, 430px);
+  margin: 55px auto 0;
+  perspective: 1200px;
+}
+
+.envelope {
+  position: relative;
+  height: 255px;
+  width: 100%;
+  background: #d9a9a6;
+  border-radius: 4px;
+  box-shadow: 0 20px 40px #57313a20;
+  isolation: isolate;
+}
+
+/* Front folds */
+
+.envelope::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #c98f96;
+  clip-path: polygon(0 0, 50% 62%, 100% 0, 100% 100%, 0 100%);
+  z-index: 3;
+  border-radius: 4px;
+}
+
+.envelope::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #b97884;
+  clip-path: polygon(0 100%, 50% 48%, 100% 100%);
+  z-index: 4;
+  border-radius: 4px;
+}
+
+/* Card visible inside envelope */
+
+.letter {
+  position: absolute;
+  left: 7%;
+  width: 86%;
+  height: 220px;
+  top: 18px;
+  padding: 20px 12px;
+  background: var(--cream);
+  border: 1px solid #e0cda8;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition:
+    transform 1.1s cubic-bezier(.2,.8,.2,1),
+    opacity .5s ease;
+  z-index: 2;
+}
+
+.letter-small {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--gold);
+}
+
+.letter-names {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(35px, 8vw, 48px);
+  color: var(--wine);
+  margin-top: 12px;
+}
+
+.letter-line {
+  width: 55px;
+  height: 1px;
+  background: var(--gold);
+  margin: 12px auto;
+}
+
+/* Envelope flap */
+
+.flap {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 140px;
+  background: #e3b9b2;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+  transform-origin: top center;
+  transform: rotateX(0deg);
+  transition: transform .8s ease;
+  z-index: 5;
+  backface-visibility: visible;
+}
+
+.seal {
+  position: absolute;
+  z-index: 6;
+  top: 103px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 47px;
+  height: 47px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 25%, #a64f61, #6f2439 75%);
+  border: 2px solid #d6b779;
+  color: #f4dca7;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+  box-shadow: 0 3px 8px #54233030;
+  transition: opacity .3s ease, transform .4s ease;
+}
+
+/* Open animation */
+
+.envelope-scene.open .flap {
+  transform: rotateX(180deg);
+  z-index: 1;
+}
+
+.envelope-scene.open .seal {
+  opacity: 0;
+  transform: translateX(-50%) scale(.5);
+}
+
+.envelope-scene.open .letter {
+  transform: translateY(-155px);
+}
+
+.open-instruction {
+  margin-top: 28px;
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--wine);
+  text-transform: uppercase;
+  animation: pulse 2s infinite;
+}
+
+.open-button {
+  margin-top: 20px;
+  padding: 14px 30px;
+  border: 1px solid var(--gold);
+  background: var(--wine);
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background .3s, transform .3s;
+}
+
+.open-button:hover {
+  background: var(--wine-dark);
+  transform: translateY(-2px);
+}
+
+.open-button:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 4px;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: .6; }
+  50% { opacity: 1; }
+}
+
+/* Full invitation: separate from envelope */
+
+.invitation {
+  display: none;
+  width: 100%;
+  max-width: 540px;
+  margin: 35px auto 0;
+  background: var(--cream);
+  border: 1px solid #d8bd8a;
+  padding: clamp(25px, 6vw, 55px);
+  position: relative;
+  box-shadow: 0 20px 60px #56313a12;
+  animation: invitationIn 1s ease both;
+}
+
+.invitation.visible {
+  display: block;
+}
+
+.invitation::before {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  border: 1px solid #eadcc3;
+  pointer-events: none;
+}
+
+.invitation-content {
+  position: relative;
+  z-index: 1;
+}
+
+.small-heading {
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  line-height: 1.8;
+}
+
+.guest-name {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 5vw, 27px);
+  color: var(--wine);
+  margin: 24px 0 15px;
+  overflow-wrap: anywhere;
+}
+
+.invite-copy {
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  line-height: 1.9;
+  max-width: 390px;
+  margin: 0 auto;
+}
+
+.couple-names {
+  font-family: 'Great Vibes', cursive;
+  color: var(--wine);
+  font-size: clamp(46px, 10vw, 67px);
+  line-height: 1.4;
+  margin: 20px 0;
+  overflow-wrap: anywhere;
+}
+
+.ornament {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
+  margin: 25px auto;
+  color: var(--gold);
+  font-size: 15px;
+}
+
+.ornament::before,
+.ornament::after {
+  content: "";
+  height: 1px;
+  width: 65px;
+  background: #d8bd8a;
+}
+
+.detail-label {
+  color: var(--gold);
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-top: 25px;
+}
+
+.detail-value {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(17px, 4vw, 21px);
+  margin-top: 9px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.rsvp {
+  margin-top: 35px;
+  font-size: 10px;
+  letter-spacing: 2px;
+  color: var(--wine);
+  line-height: 2;
+}
+
+.footer {
+  margin-top: 45px;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #aa8b7e;
+  text-transform: uppercase;
+}
+
+@keyframes invitationIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 480px) {
+  .page { padding: 35px 15px 50px; }
+  .envelope-scene { margin-top: 45px; }
+  .envelope { height: 220px; }
+  .flap { height: 120px; }
+  .seal { top: 87px; }
+  .envelope-scene.open .letter {
+    transform: translateY(-125px);
+  }
+  .invitation { margin-top: 28px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+<main class="page">
+
+  <div class="eyebrow">A celebration of love</div>
+  <h1 class="intro-title">You Are Cordially Invited</h1>
+  <div class="intro-subtitle">PLEASE OPEN YOUR INVITATION</div>
+
+  <section class="envelope-scene" id="envelopeScene">
+    <div class="envelope">
+      <div class="letter">
+        <div class="letter-small">THE WEDDING OF</div>
+        <div class="letter-names" id="previewNames">Amali & Kasun</div>
+        <div class="letter-line"></div>
+        <div class="letter-small">A DAY TO REMEMBER</div>
+      </div>
+
+      <div class="flap"></div>
+      <div class="seal">♥</div>
+    </div>
+  </section>
+
+  <div class="open-instruction" id="instruction">
+    A special invitation awaits you
+  </div>
+
+  <button
+    class="open-button"
+    id="openButton"
+    type="button"
+    onclick="openInvitation()">
+    Open your invitation
+  </button>
+
+  <section class="invitation" id="invitation" aria-hidden="true">
+    <div class="invitation-content">
+
+      <div class="small-heading">
+        Together with our families
+      </div>
+
+      <div class="couple-names" id="coupleNames">
+        Amali & Kasun
+      </div>
+
+      <div class="ornament">♥</div>
+
+      <div class="small-heading">To our dear guest</div>
+
+      <div class="guest-name" id="guestName">
+        Dear Kasun
+      </div>
+
+      <p class="invite-copy">
+        With hearts full of love and happiness,
+        we warmly invite you to celebrate the
+        beginning of our forever.
+        Your presence would make our special
+        day even more meaningful.
+      </p>
+
+      <div class="ornament">✧</div>
+
+      <div class="detail-label">The date</div>
+      <div class="detail-value" id="weddingDate">
+        15 December 2026
+      </div>
+
+      <div class="detail-label">The time</div>
+      <div class="detail-value" id="weddingTime">
+        10:00 AM
+      </div>
+
+      <div class="detail-label">The venue</div>
+      <div class="detail-value" id="weddingVenue">
+        Grand Ballroom<br>Colombo, Sri Lanka
+      </div>
+
+      <div class="ornament">♥</div>
+
+      <div class="rsvp">
+        WITH LOVE AND JOY<br>
+        <span id="footerNames">AMALI & KASUN</span>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="footer">Made with love</div>
+
+</main>
+
+<script>
+/* ======================================
+   PERSONALIZE YOUR INVITATION HERE
+   Change these values for each guest.
+====================================== */
+
+const wedding = {
+  bride: "Amali",
+  groom: "Kasun",
+  guest: "Kasun",
+  date: "15 December 2026",
+  time: "10:00 AM",
+  venue: "Grand Ballroom",
+  city: "Colombo, Sri Lanka"
+};
+
+/* ======================================
+   DISPLAY THE PERSONALIZED DETAILS
+====================================== */
+
+document.getElementById("previewNames").textContent =
+  `${wedding.bride} & ${wedding.groom}`;
+
+document.getElementById("coupleNames").textContent =
+  `${wedding.bride} & ${wedding.groom}`;
+
+document.getElementById("guestName").textContent =
+  `Dear ${wedding.guest},`;
+
+document.getElementById("weddingDate").textContent =
+  wedding.date;
+
+document.getElementById("weddingTime").textContent =
+  wedding.time;
+
+document.getElementById("weddingVenue").innerHTML =
+  `${escapeHTML(wedding.venue)}<br>${escapeHTML(wedding.city)}`;
+
+document.getElementById("footerNames").textContent =
+  `${wedding.bride} & ${wedding.groom}`.toUpperCase();
+
+/* Escape venue text before inserting it as HTML. */
+function escapeHTML(value) {
+  return String(value).replace(/[&<>"']/g, character => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[character]);
+}
+
+/* ======================================
+   ENVELOPE OPENING ANIMATION
+====================================== */
+
+let hasOpened = false;
+
+function openInvitation() {
+  if (hasOpened) {
+    document.getElementById("invitation").scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+    return;
+  }
+
+  hasOpened = true;
+
+  const scene = document.getElementById("envelopeScene");
+  const card = document.getElementById("invitation");
+  const button = document.getElementById("openButton");
+  const instruction = document.getElementById("instruction");
+
+  scene.classList.add("open");
+  button.textContent = "View invitation";
+  instruction.textContent = "Your invitation is opening...";
+
+  /* Wait for the envelope animation before revealing
+     the separate, full-size invitation below it. */
+  window.setTimeout(() => {
+    card.classList.add("visible");
+    card.setAttribute("aria-hidden", "false");
+    instruction.textContent = "A special day, shared with you";
+
+    window.setTimeout(() => {
+      card.scrollIntoView({
+        behavior: "smooth",
+        block: "start"
+      });
+    }, 200);
+  }, 950);
+}
+</script>
+</body>
+</html>
